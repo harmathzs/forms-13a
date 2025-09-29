@@ -19,12 +19,17 @@ export default class SimplePage extends React.Component {
         console.log('handleEmailBlur e', e)
     }
 
+    handleEmailChange = email => {
+        console.log('handleEmailChange email', email)
+        this.setState({email})
+    }
+
     render() {
         return (
             <div id="content-simple" className="tab-content active">
             <h2>Simple Email Form</h2>
                 <form onSubmit={this.handleFormSubmit}>
-                    <EmailInput />
+                    <EmailInput onEmailChange={this.handleEmailChange} />
                     <button type="submit">Submit</button>
                     <input type="reset" value={"Reset"} />
                 </form>

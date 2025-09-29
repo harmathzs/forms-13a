@@ -9,6 +9,7 @@ export default class SimplePage extends React.Component {
                     <label htmlFor="simpleEmail">Email address:</label>
                     <input type="email" id="simpleEmail" name="simpleEmail" placeholder="name@example.com" required autoComplete="on" />
                     <button type="submit">Submit</button>
+                    <input type="reset" value={"Reset"} />
                 </form>
             </div>
         )

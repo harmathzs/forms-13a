@@ -17,6 +17,10 @@ export default class SimplePage extends React.Component {
         console.log('email', this.state.email)
     }
 
+    handleEmailBlur = e => {
+        console.log('handleEmailBlur e', e)
+    }
+
     render() {
         return (
             <div id="content-simple" className="tab-content active">
@@ -25,6 +29,7 @@ export default class SimplePage extends React.Component {
                     <label htmlFor="simpleEmail">Email address:</label>
                     <input type="email" id="simpleEmail" name="simpleEmail" placeholder="name@example.com" required autoComplete="on" 
                         onChange={e=>this.setEmail(e.target?.value)}
+                        onBlur={this.handleEmailBlur}
                     />
                     <button type="submit">Submit</button>
                     <input type="reset" value={"Reset"} />

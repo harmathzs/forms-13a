@@ -4,10 +4,20 @@ export default class AdvancedPage extends React.Component {
     state = {
         advText: '',
         advEmail: '',
+        advTel: '',
     }
 
     handleAdvTextValueChange = advText => this.setState({advText})
     handleAdvEmailValueChange = advEmail => this.setState({advEmail})
+    handleAdvTelValueChange = advTel => {
+        console.log('handleAdvTelValueChange advTel "'+advTel+'"')
+        let result = 'error in tel: '+advTel
+        // TODO - validate tel with regex?
+        if (advTel.length>=1)
+            result = advTel
+        this.setState({advTel})
+        return result
+    }
 
     render() {
         return (
@@ -73,8 +83,13 @@ export default class AdvancedPage extends React.Component {
                         />
                     </div>
                     <div className="form-row">
-                        <label htmlFor="adv-tel">Telephone:</label>
-                        <input type="tel" id="adv-tel" name="adv-tel" placeholder="+36 20 123 4567" />
+                        <InputField 
+                            type="tel"
+                            name="adv-tel"
+                            label="Telephone:"
+                            placeholder="+36 20 123 4567"
+                            onValueChange={this.handleAdvTelValueChange}   
+                        />
                     </div>
                     <div className="form-row">
                         <label htmlFor="adv-hidden">Hidden value:</label>

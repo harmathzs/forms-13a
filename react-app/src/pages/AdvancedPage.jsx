@@ -1,10 +1,25 @@
 import React from "react";
+import InputField from "../components/InputField/InputField";
 export default class AdvancedPage extends React.Component {
+    state = {
+        advText: '',
+    }
+
+    handleAdvTextValueChange = advText => this.setState({advText})
+
     render() {
         return (
             <div id="content-advanced" className="tab-content active">
                 <h2>Advanced Form Elements</h2>
                 <form autoComplete="on">
+                    {/* TODO <InputField type="text" */}
+                    <InputField
+                        type="text"
+                        name="adv-text"
+                        label="Text:"
+                        placeholder="Text input sample"
+                        onValueChange={this.handleAdvTextValueChange}
+                    />
                     <div className="form-row">
                         <label htmlFor="adv-text">Text:</label>
                         <input type="text" id="adv-text" name="adv-text" placeholder="Text input sample" />
@@ -90,5 +105,10 @@ export default class AdvancedPage extends React.Component {
                 </form>
             </div>
         )
+    }
+
+    componentDidUpdate(prevState, prevProps) {
+        console.log('AdvancedPage state prev next', prevState, this.state)
+        console.log('AdvancedPage props prev next', prevProps, this.props)
     }
 }

@@ -10,6 +10,8 @@ export default class AdvancedPage extends React.Component {
 
         "adv-checkbox1": false,
         "adv-checkbox2": false,
+
+        radioChecked: '',
     }
 
     handleAdvTextValueChange = advText => this.setState({advText})
@@ -28,6 +30,10 @@ export default class AdvancedPage extends React.Component {
         const newState = {...this.state}
         newState[toggledCheckbox] = !this.state[toggledCheckbox]
         this.setState(newState)
+    }
+    handleRadioCheck = radioId => {
+        console.log('handleRadioCheck radioId', radioId)
+        this.setState({radioChecked: radioId})
     }
 
     getRadioGroup = () => <div className="radio-group">
@@ -75,6 +81,7 @@ export default class AdvancedPage extends React.Component {
                             ids={['adv-radio1', 'adv-radio2', 'adv-radio3']}
                             values={['A', 'B', 'C']}
                             labels={['A', 'B', 'C']}
+                            onRadioChecked={this.handleRadioCheck}
                         >content string</RadioGroup>
                     </div>
                     <div className="form-row">

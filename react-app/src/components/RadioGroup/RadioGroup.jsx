@@ -1,11 +1,12 @@
 import { Fragment, useState } from "react";
 
-export default function RadioGroup({name, ids, values, labels, children}) {
+export default function RadioGroup({name, ids, values, labels, children, onRadioChecked}) {
     const [choice, setChoice] = useState('adv-radio1')
     // lifecycle methods?
 
     const handleRadioChange = e => {
         console.log('handleRadioChange e', e)
+        onRadioChecked(e)
         setChoice(e.id)
     }
 

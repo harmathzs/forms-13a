@@ -75,7 +75,7 @@ export default class AdvancedPage extends React.Component {
                             ids={['adv-radio1', 'adv-radio2', 'adv-radio3']}
                             values={['A', 'B', 'C']}
                             labels={['A', 'B', 'C']}
-                        />
+                        >content string</RadioGroup>
                     </div>
                     <div className="form-row">
                         <label htmlFor="adv-color">Color picker:</label>

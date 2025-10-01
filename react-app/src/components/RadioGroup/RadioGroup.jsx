@@ -1,20 +1,27 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 
-export default function RadioGroup(props) {
-    // TODO - state?
+export default function RadioGroup({name, ids, values, labels, children}) {
+    const [choice, setChoice] = useState('adv-radio1')
     // lifecycle methods?
+
+    const handleRadioChange = e => {
+        console.log('handleRadioChange e', e)
+        setChoice(e.id)
+    }
 
     return (
         <div className="radio-group">
-            {props.ids.map((id, idx)=>
+            {ids.map((id, idx)=>
             <Fragment key={idx}>
                 <input
                     type="radio"
                     id={id}
-                    name={props.name}
-                    value={props.values[idx]}
+                    name={name}
+                    value={values[idx]}
+                    onChange={()=>handleRadioChange({id})}
                 />
-                <label htmlFor={id}>{props.labels[idx]}</label>
+                <label htmlFor={id}>{labels[idx]}</label>
+                {/*<p>{JSON.stringify(children)}</p>*/}
             </Fragment>)}
 
         </div>        

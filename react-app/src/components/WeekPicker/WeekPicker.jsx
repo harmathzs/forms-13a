@@ -20,4 +20,8 @@ export default class WeekPicker extends React.Component {
         </>
       )
     }
+
+    componentDidMount() {
+        console.log('props', this.props)
+    }
 }

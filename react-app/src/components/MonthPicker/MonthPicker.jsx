@@ -12,12 +12,12 @@ export default class MonthPicker extends React.Component {
 
     render() {
       return (
-        <div>
+        <>
             <label htmlFor="adv-month">Month:</label>
             <input type="month" id="adv-month" name="adv-month" 
                 onChange={this.handleMonthChange}
             />
-        </div>
+        </>
       )
     }
 }

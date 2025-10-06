@@ -7,6 +7,8 @@ import MonthPicker from "../components/MonthPicker/MonthPicker";
 import WeekPicker from "../components/WeekPicker/WeekPicker";
 import DatePicker from "../components/DatePicker/DatePicker";
 import TimePicker from "../components/TimePicker/TimePicker";
+import DatetimePicker from "../components/DatetimePicker/DatetimePicker";
+
 export default class AdvancedPage extends React.Component {
     state = {
         advText: '',
@@ -47,6 +49,7 @@ export default class AdvancedPage extends React.Component {
     handleWeekChange = week => this.setState({week})
     handleDateChange = date => this.setState({date})
     handleTimeChange = time => this.setState({time})
+    handleDatetimeChange = date => this.setState({datetime: date})
 
     getRadioGroup = () => <div className="radio-group">
                             <input type="radio" id="adv-radio1" name="adv-radio" value="A" /><label htmlFor="adv-radio1">A</label>
@@ -112,8 +115,7 @@ export default class AdvancedPage extends React.Component {
                         <TimePicker onTimeChange={this.handleTimeChange} />
                     </div>
                     <div className="form-row">
-                        <label htmlFor="adv-datetime">Local Datetime:</label>
-                        <input type="datetime-local" id="adv-datetime" name="adv-datetime" />
+                        <DatetimePicker onDatetimeChange={this.handleDatetimeChange} />
                     </div>
                     <div className="form-row">
                         <InputField

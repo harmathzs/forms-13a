@@ -19,6 +19,8 @@ export default class AdvancedPage extends React.Component {
         "adv-checkbox2": false,
 
         radioChecked: '',
+
+        "adv-hidden": "sample_hidden",
     }
 
     handleAdvTextValueChange = advText => this.setState({advText})
@@ -137,7 +139,7 @@ export default class AdvancedPage extends React.Component {
                     </div>
                     <div className="form-row">
                         <label htmlFor="adv-hidden">Hidden value:</label>
-                        <input type="hidden" id="adv-hidden" name="adv-hidden" value="sample_hidden" />
+                        <input type="hidden" id="adv-hidden" name="adv-hidden" value={this.state["adv-hidden"]} />
                         <span style={{color: "#999"}}>(hidden in UI)</span>
                     </div>
                     <div className="form-row">

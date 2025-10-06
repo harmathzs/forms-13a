@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 export default class DatetimePicker extends React.Component {
     state = {
-        date: new Date(Date.now) // "2025-10-16"
+        date: new Date(Date.now) // "2025-10-06T08:42"
     }
     handleDateChange = e => {
         this.props.onDatetimeChange(e.target.value)

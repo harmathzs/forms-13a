@@ -1,10 +1,16 @@
 import { useState } from "react"
 const NumberInput = props => {
     const [number, setNumber] = useState(42)
+    const [minValue, setMinValue] = useState(0)
+    const [maxValue, setMaxValue] = useState(100)
 
     const handleNumberChange = e => {
         //console.log('handleNumberChange e', e)
-        const newNumberValue = e.target.value
+        let newNumberValue = +e.target.value
+        // validate number value
+        if (newNumberValue<minValue) newNumberValue = minValue
+        if (newNumberValue>maxValue) newNumberValue = maxValue
+
         console.log('newNumberValue', newNumberValue)
         setNumber(newNumberValue)
     }

@@ -8,6 +8,7 @@ import WeekPicker from "../components/WeekPicker/WeekPicker";
 import DatePicker from "../components/DatePicker/DatePicker";
 import TimePicker from "../components/TimePicker/TimePicker";
 import DatetimePicker from "../components/DatetimePicker/DatetimePicker";
+import NumberInput from "../components/NumberInput/NumberInput";
 
 export default class AdvancedPage extends React.Component {
     state = {
@@ -143,8 +144,7 @@ export default class AdvancedPage extends React.Component {
                         <span style={{color: "#999"}}>(hidden in UI)</span>
                     </div>
                     <div className="form-row">
-                        <label htmlFor="adv-number">Number:</label>
-                        <input type="number" id="adv-number" name="adv-number" min="0" max="100" step="1" value="42" onChange={()=>{}} />
+                        <NumberInput />
                     </div>
                     <div className="form-row range-bar">
                         <label htmlFor="adv-range">Range:</label>

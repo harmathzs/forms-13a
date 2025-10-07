@@ -11,6 +11,7 @@ import DatetimePicker from "../components/DatetimePicker/DatetimePicker";
 import NumberInput from "../components/NumberInput/NumberInput";
 import DropDown from "../components/DropDown/DropDown";
 import RangeSlider from "../components/RangeSlider/RangeSlider";
+import MultilineInput from "../components/MultilineInput/MultilineInput";
 
 export default class AdvancedPage extends React.Component {
     state = {
@@ -59,6 +60,7 @@ export default class AdvancedPage extends React.Component {
     handleNumberChange = number => this.setState({number})
     handleSelectDropdown = choice => this.setState({choice})
     handleSlide = sliderNumber => this.setState({sliderNumber})
+    handleMultilineChange = multiline => this.setState({multiline: multiline.split('\n')})
 
     getRadioGroup = () => <div className="radio-group">
                             <input type="radio" id="adv-radio1" name="adv-radio" value="A" /><label htmlFor="adv-radio1">A</label>
@@ -159,8 +161,7 @@ export default class AdvancedPage extends React.Component {
                         <DropDown onSelect={this.handleSelectDropdown} />
                     </div>
                     <div className="form-row">
-                        <label htmlFor="adv-textarea">Textarea:</label>
-                        <textarea id="adv-textarea" name="adv-textarea" placeholder="Comments..."></textarea>
+                        <MultilineInput onChange={this.handleMultilineChange} />
                     </div>
                     <div className="button-row">
                         <button type="submit">Submit</button>

@@ -56,6 +56,7 @@ export default class AdvancedPage extends React.Component {
     handleDatetimeChange = date => this.setState({datetime: date})
 
     handleNumberChange = number => this.setState({number})
+    handleSelectDropdown = choice => this.setState({choice})
 
     getRadioGroup = () => <div className="radio-group">
                             <input type="radio" id="adv-radio1" name="adv-radio" value="A" /><label htmlFor="adv-radio1">A</label>
@@ -155,7 +156,7 @@ export default class AdvancedPage extends React.Component {
                         <span id="rangeValue" style={{minWidth:'32px'}}>50</span>
                     </div>
                     <div className="form-row">
-                        <DropDown />
+                        <DropDown onSelect={this.handleSelectDropdown} />
                     </div>
                     <div className="form-row">
                         <label htmlFor="adv-textarea">Textarea:</label>

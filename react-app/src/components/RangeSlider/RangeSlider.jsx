@@ -1,11 +1,13 @@
 import { useState } from "react"
 export default function RangeSlider(props) {
+    const {onSlide} = props
     const [number, setNumber] = useState(50)
 
     const handleSlide = e => {
         const {value} = e.target
         const newNumber = +value
         //console.log('handleSlide e', e)
+        onSlide(newNumber)
         setNumber(newNumber)
     }
 

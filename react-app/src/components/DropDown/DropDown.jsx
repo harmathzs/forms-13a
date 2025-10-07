@@ -16,7 +16,7 @@ export default class DropDown extends Component {
         return <Fragment>
             <label htmlFor="adv-select">Select:</label>
             <select id="adv-select" name="adv-select" onChange={this.handleChoose}>
-                <option>--- Choose ---</option>
+                {!this.state.dropdownChosen && <option>--- Choose ---</option>}
                 {Array.from(this.state.options.entries())
                     .map(([key, value])=>(
                         <option key={key} value={key}>{value}</option>

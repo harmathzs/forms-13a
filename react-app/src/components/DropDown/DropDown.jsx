@@ -1,7 +1,8 @@
 import React, {Component, Fragment} from "react";
 export default class DropDown extends Component {
     state = {
-        dropdownChosen: null
+        dropdownChosen: null,
+        options: new Map()
     }
 
     handleChoose = e => {
@@ -16,10 +17,24 @@ export default class DropDown extends Component {
             <label htmlFor="adv-select">Select:</label>
             <select id="adv-select" name="adv-select" onChange={this.handleChoose}>
                 <option>--- Choose ---</option>
-                <option value="foo">Foo</option>
-                <option value="bar">Bar</option>
-                <option value="baz">Baz</option>
+                {Array.from(this.state.options.entries())
+                    .map(([key, value])=>(
+                        <option key={key} value={key}>{value}</option>
+                    ))
+                }
             </select>            
         </Fragment>
+    }
+
+    componentDidMount() {
+        //this.options.set("foo", "Foo")
+        //this.options.set("bar", "Bar")
+        //this.options.set("baz", "Baz")
+
+        const optionsMap = new Map()
+        optionsMap.set("foo", "Foo")
+        optionsMap.set("bar", "Bar")
+        optionsMap.set("baz", "Baz")
+        this.setState({options: optionsMap})
     }
 }

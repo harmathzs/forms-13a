@@ -215,3 +215,7 @@ form button[type='submit'],
   width: 200px;
   box-sizing: border-box;
 }
+
+select {
+  width: 180px;
+}

@@ -155,8 +155,8 @@ export default class AdvancedPage extends React.Component {
                     </div>
                     <div className="form-row">
                         <label htmlFor="adv-select">Select:</label>
-                        <select id="adv-select" name="adv-select">
-                            <option>--- Choose ---</option>
+                        <select id="adv-select" name="adv-select" placeholder="--- Choose ---">
+                            {/*<option>--- Choose ---</option>*/}
                             <option value="foo">Foo</option>
                             <option value="bar">Bar</option>
                             <option value="baz">Baz</option>

@@ -9,6 +9,7 @@ import DatePicker from "../components/DatePicker/DatePicker";
 import TimePicker from "../components/TimePicker/TimePicker";
 import DatetimePicker from "../components/DatetimePicker/DatetimePicker";
 import NumberInput from "../components/NumberInput/NumberInput";
+import DropDown from "../components/DropDown/DropDown";
 
 export default class AdvancedPage extends React.Component {
     state = {
@@ -154,13 +155,7 @@ export default class AdvancedPage extends React.Component {
                         <span id="rangeValue" style={{minWidth:'32px'}}>50</span>
                     </div>
                     <div className="form-row">
-                        <label htmlFor="adv-select">Select:</label>
-                        <select id="adv-select" name="adv-select">
-                            <option>--- Choose ---</option>
-                            <option value="foo">Foo</option>
-                            <option value="bar">Bar</option>
-                            <option value="baz">Baz</option>
-                        </select>
+                        <DropDown />
                     </div>
                     <div className="form-row">
                         <label htmlFor="adv-textarea">Textarea:</label>

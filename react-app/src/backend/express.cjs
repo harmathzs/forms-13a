@@ -1,6 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const multer = require('multer')
+const ftp = require('basic-ftp')
 
 const upload = multer({dest: 'data/'})
 const app = express()
@@ -8,7 +9,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-app.post('/file-upload', upload.single("file"), (req, res)=>{
+app.post('/file-upload', upload.single("file"), async (req, res)=>{
     console.log('req.body', req.body) // {}
     console.log('req.file', req.file)
     /*
@@ -23,6 +24,15 @@ app.post('/file-upload', upload.single("file"), (req, res)=>{
             size: 26
         }    
     */
+
+    const ftpClient = new ftp.Client()
+    await ftpClient.access({
+        host: '192.168.56.1',
+        user: 'tester',
+        password: 'password',
+    })
+    await ftpClient.uploadFrom(req.file.path, req.file.originalname)
+    ftpClient.close()
 
     res.sendStatus(200)
 })

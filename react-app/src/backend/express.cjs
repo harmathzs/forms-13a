@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const multer = require('multer')
 const ftp = require('basic-ftp')
+const fs = require('fs')
 
 const upload = multer({dest: 'data/'})
 const app = express()
@@ -25,16 +26,24 @@ app.post('/file-upload', upload.single("file"), async (req, res)=>{
         }    
     */
 
-    const ftpClient = new ftp.Client()
-    await ftpClient.access({
-        host: '192.168.56.1',
-        user: 'tester',
-        password: 'password',
-    })
-    await ftpClient.uploadFrom(req.file.path, req.file.originalname)
-    ftpClient.close()
+    const ftpClient = new ftp.Client()        
+    try {
+        await ftpClient.access({
+            host: '192.168.56.1',
+            user: 'tester',
+            password: 'password',
+        })
+        await ftpClient.uploadFrom(req.file.path, req.file.originalname)
+        
+        res.sendStatus(201) // Created OK
+    } catch(e) {
+        res.sendStatus(500) // Internal server error
+    } finally {
+        ftpClient.close()
+        if (req.file) fs.unlinkSync(req.file.path) // clean up
+    }
 
-    res.sendStatus(200)
+    
 })
 
 const port = 3333

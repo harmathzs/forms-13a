@@ -46,6 +46,13 @@ app.post('/file-upload', upload.single("file"), async (req, res)=>{
     
 })
 
+app.post('/login-email', (req, res)=>{
+    console.log('req.body', req.body)
+    const {email, password} = req.body
+
+    res.sendStatus(200)
+})
+
 const port = 3333
 app.listen(port, err=>{
     if (err) console.warn(err)

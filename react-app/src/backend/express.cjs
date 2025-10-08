@@ -46,11 +46,19 @@ app.post('/file-upload', upload.single("file"), async (req, res)=>{
     
 })
 
+const users = [
+    {email: 'john@doe.com', password: 'Almafa1!'},
+    {email: 'jill@doe.com', password: 'Monkey2!'},
+]
+
 app.post('/login-email', (req, res)=>{
     console.log('req.body', req.body)
     const {email, password} = req.body
 
-    res.sendStatus(200)
+    const loggedInUser = users.find(user=> user.email == email && user.password == password )
+    
+    if (loggedInUser) res.status(200).json({login: true, loggedInUser})
+    else res.status(300).json({login: false})
 })
 
 const port = 3333

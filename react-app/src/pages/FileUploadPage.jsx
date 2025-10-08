@@ -23,7 +23,9 @@ export default class FileUploadPage extends React.Component {
         formData.append("file", this.state.selectedFile)
 
         // send file to backend
-        fetch("/file-upload", {
+        const endpointBaseUrl = "http://localhost:3333"
+        const endpointRelativePath = "/file-upload"
+        fetch(endpointBaseUrl + endpointRelativePath, {
             method: 'POST',
             body: formData,
         })

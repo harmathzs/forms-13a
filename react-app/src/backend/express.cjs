@@ -6,7 +6,11 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+app.post('/file-upload', (req, res)=>{
+    console.log('req.body', req.body)
 
+    res.sendStatus(200)
+})
 
 const port = 3333
 app.listen(port, err=>{

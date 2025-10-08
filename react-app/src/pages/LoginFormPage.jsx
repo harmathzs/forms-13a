@@ -22,7 +22,7 @@ export default class LoginFormPage extends React.Component {
     fetch('http://localhost:3333/login-email', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(this.state)
+      body: JSON.stringify({email: this.state.email, password: this.state.password})
     })
     .then(response=>{
       /*

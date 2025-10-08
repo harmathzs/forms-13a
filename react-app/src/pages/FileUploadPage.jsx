@@ -18,7 +18,18 @@ export default class FileUploadPage extends React.Component {
             return null
         }
 
-        
+        // Prepare file for uploading
+        const formData = new FormData()
+        formData.append("file", this.state.selectedFile)
+
+        // send file to backend
+        fetch("/file-upload", {
+            method: 'POST',
+            body: formData,
+        })
+        .then(console.log)
+        .catch(console.warn)
+        .finally( ()=>{} )
     }
 
     render() {

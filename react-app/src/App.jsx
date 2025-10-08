@@ -49,18 +49,24 @@ export default class App extends React.Component {
                   </button>
                 </div>
                 <div className="navbar-right">
-                  {!this.state.loggedInEmail && <button 
-                    className={"nav-btn" + (this.state.pageName=='LoginFormPage' ? " active" : "") }  
-                    id="tabLogin" 
-                    onClick={()=>this.setState({pageName: 'LoginFormPage'})}>
-                      Login
-                  </button>}
-                  {this.state.loggedInEmail && <button 
-                    className={"nav-btn" + (this.state.pageName=='LoginFormPage' ? " active" : "") }  
-                    id="tabLogin" 
-                    onClick={()=>this.handleLogout()}>
-                      Logout
-                  </button>}                  
+                  {!this.state.loggedInEmail && <>
+                    <p>{this.state.loggedInEmail}</p> 
+                    <button 
+                      className={"nav-btn" + (this.state.pageName=='LoginFormPage' ? " active" : "") }  
+                      id="tabLogin" 
+                      onClick={()=>this.setState({pageName: 'LoginFormPage'})}>
+                        Login
+                    </button>
+                  </>}
+                  {this.state.loggedInEmail && <> 
+                    <p>{this.state.loggedInEmail}</p> 
+                    <button 
+                      className={"nav-btn" + (this.state.pageName=='LoginFormPage' ? " active" : "") }  
+                      id="tabLogin" 
+                      onClick={()=>this.handleLogout()}>
+                        Logout
+                    </button>
+                  </>}                  
                 </div>
               </nav>
 

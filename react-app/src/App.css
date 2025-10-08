@@ -219,3 +219,7 @@ form button[type='submit'],
 select {
   width: 180px;
 }
+
+p {
+  margin-right: 10px;
+}

@@ -4,6 +4,7 @@ export default class LoginFormPage extends React.Component {
   state = {
     email: '',
     password: '',
+    loggedIn: false,
   }
 
   handleEmailChange = e => this.setState({email: e.target.value})
@@ -23,7 +24,14 @@ export default class LoginFormPage extends React.Component {
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(this.state)
     })
-    .then(console.log)
+    .then(response=>{
+      /*
+      if (response.ok) {
+        this.setState({loggedIn: true})
+      }
+      */
+      this.setState({loggedIn: response.ok})
+    })
     .catch(console.warn)
     .finally( ()=>{} )
   }
@@ -49,6 +57,8 @@ export default class LoginFormPage extends React.Component {
           <button type="button" className="social-btn salesforce-login">Login with Salesforce</button>
           <button type="button" className="social-btn facebook-login">Login with Facebook</button>
         </div>
+        <hr style={{ margin: "24px 0" }} />
+        {this.state.loggedIn && <p>{this.state.email} is logged in! :) </p>}
       </div>
     );
   }

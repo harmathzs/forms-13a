@@ -12,6 +12,19 @@ export default class LoginFormPage extends React.Component {
   handleSubmit = e => {
     e.preventDefault()
     // validate client-side
+    if (this.state.password.length <8) {
+      console.warn('Password length should be at least 8')
+      return 'Password length should be at least 8'
+    }
+
+    // send to backend
+    fetch('http://localhost:3333/login-email', {
+      method: 'POST',
+      body: this.state
+    })
+    .then(console.log)
+    .catch(console.warn)
+    .finally( ()=>{} )
   }
 
   render() {

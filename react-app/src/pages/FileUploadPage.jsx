@@ -1,7 +1,8 @@
 import React from "react";
 export default class FileUploadPage extends React.Component {
     state = {
-        selectedFile: null
+        selectedFile: null,
+        responseMessage: ''
     }
 
     handleFileSelect = e => {
@@ -30,7 +31,7 @@ export default class FileUploadPage extends React.Component {
             body: formData,
         })
         .then(res=>res.text())
-        .then(console.log)
+        .then(responseMessage=>this.setState({responseMessage})) // this.setState({responseMessage: "file uploaded successfully"})
         .catch(console.warn)
         .finally( ()=>{} )
     }
@@ -46,6 +47,7 @@ export default class FileUploadPage extends React.Component {
                     />
                     <button type="submit">Upload</button>
                 </form>
+                <p>{this.state.responseMessage}</p>
             </div>
         )
     }

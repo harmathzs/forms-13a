@@ -29,6 +29,7 @@ export default class FileUploadPage extends React.Component {
             method: 'POST',
             body: formData,
         })
+        .then(res=>res.text())
         .then(console.log)
         .catch(console.warn)
         .finally( ()=>{} )

@@ -20,6 +20,10 @@ export default class App extends React.Component {
     this.setState({loggedInEmail: login.email})
   }
 
+  handleLogout = e => {
+    this.setState({loggedInEmail: null})
+  }
+
     render() {
         return (
             <div className="site-wrapper">
@@ -54,7 +58,7 @@ export default class App extends React.Component {
                   {this.state.loggedInEmail && <button 
                     className={"nav-btn" + (this.state.pageName=='LoginFormPage' ? " active" : "") }  
                     id="tabLogin" 
-                    onClick={()=>this.setState({pageName: 'LoginFormPage'})}>
+                    onClick={()=>this.handleLogout()}>
                       Logout
                   </button>}                  
                 </div>
@@ -64,7 +68,8 @@ export default class App extends React.Component {
                 {this.state.pageName=='SimplePage' && <SimplePage />}
                 {this.state.pageName=='AdvancedPage' && <AdvancedPage />}
                 {this.state.pageName=='FileUploadPage' && <FileUploadPage />}
-                {this.state.pageName=='LoginFormPage' && <LoginFormPage onLogin={this.handleLogin} />}
+                {this.state.pageName=='LoginFormPage' && 
+                  <LoginFormPage onLogin={this.handleLogin} login={this.state.loggedInEmail!=null} />}
               </div>
             </div>
         )

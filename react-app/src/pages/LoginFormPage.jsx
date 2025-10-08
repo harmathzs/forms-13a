@@ -74,5 +74,7 @@ export default class LoginFormPage extends React.Component {
     console.log('update email to: ', this.state.email)
 
     if (!prevState.loggedIn && this.state.loggedIn) this.props.onLogin({email: this.state.email})
+
+    if (prevProps.login && !this.props.login) this.setState({loggedIn: false})
   }
 }

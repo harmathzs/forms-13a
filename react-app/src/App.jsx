@@ -13,6 +13,10 @@ export default class App extends React.Component {
   state = {
     pageName: 'SimplePage',
   }
+  
+  handleLogin = login => {
+    console.log('handleLogin login', login)
+  }
 
     render() {
         return (
@@ -52,7 +56,7 @@ export default class App extends React.Component {
                 {this.state.pageName=='SimplePage' && <SimplePage />}
                 {this.state.pageName=='AdvancedPage' && <AdvancedPage />}
                 {this.state.pageName=='FileUploadPage' && <FileUploadPage />}
-                {this.state.pageName=='LoginFormPage' && <LoginFormPage />}
+                {this.state.pageName=='LoginFormPage' && <LoginFormPage onLogin={this.handleLogin} />}
               </div>
             </div>
         )

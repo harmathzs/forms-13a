@@ -2,20 +2,22 @@ import React from "react";
 export default class FileUploadPage extends React.Component {
     state = {
         selectedFile: null,
-        responseMessage: ''
+        responseMessage: '',
+        value: null,
+        ref: null
     }
 
     handleFileSelect = e => {
         //console.log('handleFileSelect files', e.target.files[0])
 
         const selectedFile = e.target.files[0]
-        this.setState({selectedFile})
+        this.setState({selectedFile, ref: null})
     }
 
     handleSubmit = e => {
         e.preventDefault()
         if (!this.state.selectedFile) {
-            console.warn('Hey, no file is selected!')
+            console.warn('Hey, no new file is selected!')
             return null
         }
 
@@ -31,7 +33,9 @@ export default class FileUploadPage extends React.Component {
             body: formData,
         })
         .then(res=>res.text())
-        .then(responseMessage=>this.setState({responseMessage})) // this.setState({responseMessage: "file uploaded successfully"})
+        .then(responseMessage=>this.setState({
+            responseMessage, selectedFile: null
+        })) // this.setState({responseMessage: "file uploaded successfully"})
         .catch(console.warn)
         .finally( ()=>{} )
     }
@@ -43,7 +47,8 @@ export default class FileUploadPage extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <label htmlFor="fileInput">Choose file to upload:</label>
                     <input type="file" id="fileInput" name="fileInput" multiple
-                        onChange={this.handleFileSelect}
+                        onChange={this.handleFileSelect} 
+                        ref={this.state.ref}
                     />
                     <button type="submit">Upload</button>
                 </form>

@@ -12,10 +12,12 @@ import './App.css';
 export default class App extends React.Component {
   state = {
     pageName: 'SimplePage',
+    loggedInEmail: null,
   }
   
   handleLogin = login => {
     console.log('handleLogin login', login)
+    this.setState({loggedInEmail: login.email})
   }
 
     render() {
@@ -43,12 +45,18 @@ export default class App extends React.Component {
                   </button>
                 </div>
                 <div className="navbar-right">
-                  <button 
+                  {!this.state.loggedInEmail && <button 
                     className={"nav-btn" + (this.state.pageName=='LoginFormPage' ? " active" : "") }  
                     id="tabLogin" 
                     onClick={()=>this.setState({pageName: 'LoginFormPage'})}>
                       Login
-                  </button>
+                  </button>}
+                  {this.state.loggedInEmail && <button 
+                    className={"nav-btn" + (this.state.pageName=='LoginFormPage' ? " active" : "") }  
+                    id="tabLogin" 
+                    onClick={()=>this.setState({pageName: 'LoginFormPage'})}>
+                      Logout
+                  </button>}                  
                 </div>
               </nav>
 

@@ -2,6 +2,9 @@
 
 import React from "react";
 
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import googleCredentials from "./credentials/google-credentials";
+
 import SimplePage from "./pages/SimplePage";
 import AdvancedPage from "./pages/AdvancedPage";
 import FileUploadPage from "./pages/FileUploadPage";
@@ -75,11 +78,14 @@ export default class App extends React.Component {
                 {this.state.pageName=='AdvancedPage' && <AdvancedPage />}
                 {this.state.pageName=='FileUploadPage' && <FileUploadPage />}
                 {this.state.pageName=='LoginFormPage' && 
-                  <LoginFormPage 
-                    onLogin={this.handleLogin} 
-                    onLogout={this.handleLogout}
-                    login={this.state.loggedInEmail!=null} 
-                  />}
+                  <GoogleOAuthProvider clientId={googleCredentials.clientId}>
+                    <LoginFormPage 
+                      onLogin={this.handleLogin} 
+                      onLogout={this.handleLogout}
+                      login={this.state.loggedInEmail!=null} 
+                    />
+                  </GoogleOAuthProvider>
+                  }
               </div>
             </div>
         )

@@ -1,5 +1,7 @@
 import React from "react";
 
+import { useGoogleLogin } from "@react-oauth/google";
+
 export default class LoginFormPage extends React.Component {
   state = {
     email: '',
@@ -38,6 +40,22 @@ export default class LoginFormPage extends React.Component {
     .finally( ()=>{} )
   }
 
+  handleGoogleLoginButtonClick = e => {
+    const {clientId} = this.props
+    console.log('clientId', clientId)
+
+    const login = useGoogleLogin({
+      flow: "auth-code", // code-based Oauth2 flow
+      redirect_uri: "http://localhost:5173",
+      scope: "openid email profile",
+
+      onError: console.warn,
+      onSuccess: res => {
+        console.log('useGoogleLogin res', res)
+      }
+    })
+  }
+
   render() {
     return (
       <>
@@ -62,7 +80,9 @@ export default class LoginFormPage extends React.Component {
             </form>
             <hr style={{ margin: "24px 0" }} />
             <div className="social-login">
-              <button type="button" className="social-btn google-login">Login with Google</button>
+              <button type="button" className="social-btn google-login"
+                onClick={this.handleGoogleLoginButtonClick}
+              >Login with Google</button>
               <button type="button" className="social-btn salesforce-login">Login with Salesforce</button>
               <button type="button" className="social-btn facebook-login">Login with Facebook</button>
             </div>  

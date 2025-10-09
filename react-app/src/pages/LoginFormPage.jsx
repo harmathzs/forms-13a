@@ -31,6 +31,7 @@ export default class LoginFormPage extends React.Component {
       }
       */
      console.log('fetch response', response)
+     if (!response.ok) this.props.onLogout(false)
       this.setState({loggedIn: response.ok})
     })
     .catch(console.warn)

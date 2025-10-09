@@ -75,7 +75,11 @@ export default class App extends React.Component {
                 {this.state.pageName=='AdvancedPage' && <AdvancedPage />}
                 {this.state.pageName=='FileUploadPage' && <FileUploadPage />}
                 {this.state.pageName=='LoginFormPage' && 
-                  <LoginFormPage onLogin={this.handleLogin} login={this.state.loggedInEmail!=null} />}
+                  <LoginFormPage 
+                    onLogin={this.handleLogin} 
+                    onLogout={this.handleLogout}
+                    login={this.state.loggedInEmail!=null} 
+                  />}
               </div>
             </div>
         )

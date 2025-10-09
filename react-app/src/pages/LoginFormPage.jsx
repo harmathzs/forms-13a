@@ -1,6 +1,7 @@
 import React from "react";
 
 import { useGoogleLogin } from "@react-oauth/google";
+import GoogleLogin from "../components/GoogleLogin/GoogleLogin";
 
 export default class LoginFormPage extends React.Component {
   state = {
@@ -80,9 +81,7 @@ export default class LoginFormPage extends React.Component {
             </form>
             <hr style={{ margin: "24px 0" }} />
             <div className="social-login">
-              <button type="button" className="social-btn google-login"
-                onClick={this.handleGoogleLoginButtonClick}
-              >Login with Google</button>
+              <GoogleLogin clientId={this.props.clientId} />
               <button type="button" className="social-btn salesforce-login">Login with Salesforce</button>
               <button type="button" className="social-btn facebook-login">Login with Facebook</button>
             </div>  

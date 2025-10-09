@@ -54,10 +54,7 @@ app.post('/file-upload', upload.single("file"), async (req, res)=>{
     
 })
 
-var users = [
-    {email: 'TEST@doe.com', password: 'TEST1!'},
-    {email: 'jill@TEST.com', password: 'TEST2!'},
-]
+var users = []
 
 app.post('/login-email', (req, res)=>{
     console.log('req.body', req.body)

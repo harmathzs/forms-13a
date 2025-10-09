@@ -16,6 +16,7 @@ export default class App extends React.Component {
   state = {
     pageName: 'SimplePage',
     loggedInEmail: null,
+    clientId: ''
   }
   
   handleLogin = login => {
@@ -78,8 +79,9 @@ export default class App extends React.Component {
                 {this.state.pageName=='AdvancedPage' && <AdvancedPage />}
                 {this.state.pageName=='FileUploadPage' && <FileUploadPage />}
                 {this.state.pageName=='LoginFormPage' && 
-                  <GoogleOAuthProvider clientId={googleCredentials.clientId}>
+                  <GoogleOAuthProvider clientId={this.state.clientId}>
                     <LoginFormPage 
+                      clientId={this.state.clientId}
                       onLogin={this.handleLogin} 
                       onLogout={this.handleLogout}
                       login={this.state.loggedInEmail!=null} 
@@ -89,5 +91,10 @@ export default class App extends React.Component {
               </div>
             </div>
         )
+    }
+
+    componentDidMount() {
+      console.log('App clientId', googleCredentials.clientId)
+      this.setState({clientId: googleCredentials.clientId})
     }
 }

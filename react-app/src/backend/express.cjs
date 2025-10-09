@@ -72,6 +72,8 @@ app.post('/login-email', (req, res)=>{
                         users = [...result]
                         console.log('users', users)
                         
+                        if (users.length <1) res.status(300).json({login: false})
+
                         const decodedUsers = users.forEach(async user=>{
                             const cryptedPassword = user.password
                             const isMatch = await bcrypt.compare(password, cryptedPassword)

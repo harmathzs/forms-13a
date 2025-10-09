@@ -3,12 +3,20 @@ const cors = require('cors')
 const multer = require('multer')
 const ftp = require('basic-ftp')
 const fs = require('fs')
+const mysql = require('mysql2')
 
 const upload = multer({dest: 'data/'})
 const app = express()
 
 app.use(cors())
 app.use(express.json())
+
+const conn = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'vr_mn_db'
+})
 
 app.post('/file-upload', upload.single("file"), async (req, res)=>{
     console.log('req.body', req.body) // {}
@@ -56,11 +64,24 @@ app.post('/login-email', (req, res)=>{
     const {email, password} = req.body
     // SELECT email, password FROM users WHERE email={email} AND password={password}
     // AND {email} IS NOT NULL AND {password} IS NOT NULL
-
-    const loggedInUser = users.find(user=> user.email == email && user.password == password )
-    
-    if (loggedInUser) res.status(200).json({login: true, loggedInUser})
-    else res.status(300).json({login: false})
+    conn.connect(connectError=>{
+        if (connectError) console.warn(connectError)
+        else {
+            conn.query(`SELECT email, password FROM users WHERE email="${email}" AND password="${password}"`, 
+                (err, result, fields)=>{
+                    if (err) console.warn(err)
+                    else if (result) {
+                        users = [...result]
+                        console.log('users', users)
+                        const loggedInUser = users.find(user=> user.email == email && user.password == password )
+                        
+                        if (loggedInUser) res.status(200).json({login: true, loggedInUser})
+                        else res.status(300).json({login: false})                        
+                    }
+                }
+            )
+        }
+    })
 })
 
 const port = 3333

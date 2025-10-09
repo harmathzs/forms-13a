@@ -4,6 +4,7 @@ const multer = require('multer')
 const ftp = require('basic-ftp')
 const fs = require('fs')
 const mysql = require('mysql2')
+const bcrypt = require('bcrypt')
 
 const upload = multer({dest: 'data/'})
 const app = express()
@@ -64,16 +65,26 @@ app.post('/login-email', (req, res)=>{
     conn.connect(connectError=>{
         if (connectError) console.warn(connectError)
         else {
-            conn.query(`SELECT email, password FROM users WHERE email="${email}" AND password="${password}"`, 
+            conn.query(`SELECT email, password FROM users WHERE email="${email}"`, 
                 (err, result, fields)=>{
                     if (err) console.warn(err)
                     else if (result) {
                         users = [...result]
                         console.log('users', users)
-                        const loggedInUser = users.find(user=> user.email == email && user.password == password )
                         
-                        if (loggedInUser) res.status(200).json({login: true, loggedInUser})
-                        else res.status(300).json({login: false})                        
+                        const decodedUsers = users.forEach(async user=>{
+                            const cryptedPassword = user.password
+                            const isMatch = await bcrypt.compare(password, cryptedPassword)
+                            console.log('isMatch, email, password', isMatch, email, password)
+                            //return isMatch && {email, password}
+                            if (isMatch==true) {
+                                //const loggedInUser = users.find(user=> user.email == email && user.password == password )
+                                res.status(200).json({login: true, loggedInUser: {email, password} })
+                            } else res.status(300).json({login: false})
+                        })
+                        //console.log('decodedUsers', decodedUsers)
+
+                      
                     }
                 }
             )

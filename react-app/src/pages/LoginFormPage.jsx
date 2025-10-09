@@ -4,7 +4,7 @@ export default class LoginFormPage extends React.Component {
   state = {
     email: '',
     password: '',
-    loggedIn: false,
+    loggedIn: null,
   }
 
   handleEmailChange = e => this.setState({email: e.target.value})
@@ -30,6 +30,7 @@ export default class LoginFormPage extends React.Component {
         this.setState({loggedIn: true})
       }
       */
+     console.log('fetch response', response)
       this.setState({loggedIn: response.ok})
     })
     .catch(console.warn)
@@ -63,7 +64,8 @@ export default class LoginFormPage extends React.Component {
               <button type="button" className="social-btn google-login">Login with Google</button>
               <button type="button" className="social-btn salesforce-login">Login with Salesforce</button>
               <button type="button" className="social-btn facebook-login">Login with Facebook</button>
-            </div>        
+            </div>  
+            {this.state.loggedIn === false && <p>You are NOT logged in yet, sorry. </p>}
           </div>
         }      
       </>
@@ -71,7 +73,7 @@ export default class LoginFormPage extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('update email to: ', this.state.email)
+    //console.log('update email to: ', this.state.email)
 
     if (!prevState.loggedIn && this.state.loggedIn) this.props.onLogin({email: this.state.email})
 

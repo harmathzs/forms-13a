@@ -46,14 +46,16 @@ app.post('/file-upload', upload.single("file"), async (req, res)=>{
     
 })
 
-const users = [
-    {email: 'john@doe.com', password: 'Almafa1!'},
-    {email: 'jill@doe.com', password: 'Monkey2!'},
+var users = [
+    {email: 'TEST@doe.com', password: 'TEST1!'},
+    {email: 'jill@TEST.com', password: 'TEST2!'},
 ]
 
 app.post('/login-email', (req, res)=>{
     console.log('req.body', req.body)
     const {email, password} = req.body
+    // SELECT email, password FROM users WHERE email={email} AND password={password}
+    // AND {email} IS NOT NULL AND {password} IS NOT NULL
 
     const loggedInUser = users.find(user=> user.email == email && user.password == password )
     

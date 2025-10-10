@@ -2,7 +2,7 @@ import { useGoogleLogin } from "@react-oauth/google"
 import { useState } from "react"
 /* npm i @react-oauth/google google-auth-library dotenv */
 export default function GoogleLogin(props) {
-  const {clientId, onGoogleLogin} = props
+  const {onGoogleLogin} = props
 
   const [accessToken, setAccessToken] = useState('')
 
@@ -26,7 +26,8 @@ export default function GoogleLogin(props) {
         .then(res=>{
           console.log('200 OK, response body: ', res)
           const accessToken = res.tokens.access_token
-          onGoogleLogin(res.tokens)
+          const userInfo = res.userInfo
+          onGoogleLogin({access_token: res.tokens.access_token, userInfo})
           setAccessToken(accessToken)
         })
         .catch(console.warn)

@@ -6,6 +6,7 @@ import GoogleLogin from "../components/GoogleLogin/GoogleLogin";
 export default class LoginFormPage extends React.Component {
   state = {
     email: '',
+    name: '',
     password: '',
     loggedIn: null,
   }
@@ -13,7 +14,10 @@ export default class LoginFormPage extends React.Component {
   handleEmailChange = e => this.setState({email: e.target.value})
   handlePasswordChange = e => this.setState({password: e.target.value})
 
-  handleGoogleLogin = login => this.setState({loggedIn: true})
+  handleGoogleLogin = login => {
+    console.log('handleGoogleLogin login', login)
+    this.setState({loggedIn: true, name: login.userInfo.name, email: login.userInfo.email})
+  }
 
   handleSubmit = e => {
     e.preventDefault()

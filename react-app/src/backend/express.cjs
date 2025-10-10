@@ -106,7 +106,16 @@ app.post('/auth/google/access-token', async (req, res)=>{
     if (!code) return res.sendStatus(400)
     else {
         const { tokens } = await oauth2Client.getToken(code)
-        res.status(200).json({tokens})
+        const userInfoJson = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
+            headers: {
+                Authorization: `Bearer ${tokens.access_token}`,
+                'Content-Type': 'application/json'
+            }
+        })
+        console.log('userInfoJson', userInfoJson)
+        const userInfo = await userInfoJson.json()
+        console.log('userInfo', userInfo)
+        res.status(200).json({tokens, userInfo})
     }
 })
 

@@ -1,14 +1,23 @@
 import React from "react";
 
+import { useGoogleLogin } from "@react-oauth/google";
+import GoogleLogin from "../components/GoogleLogin/GoogleLogin";
+
 export default class LoginFormPage extends React.Component {
   state = {
     email: '',
+    name: '',
     password: '',
     loggedIn: null,
   }
 
   handleEmailChange = e => this.setState({email: e.target.value})
   handlePasswordChange = e => this.setState({password: e.target.value})
+
+  handleGoogleLogin = login => {
+    console.log('handleGoogleLogin login', login)
+    this.setState({loggedIn: true, name: login.userInfo.name, email: login.userInfo.email})
+  }
 
   handleSubmit = e => {
     e.preventDefault()
@@ -38,13 +47,29 @@ export default class LoginFormPage extends React.Component {
     .finally( ()=>{} )
   }
 
+  handleGoogleLoginButtonClick = e => {
+    const {clientId} = this.props
+    console.log('clientId', clientId)
+
+    const login = useGoogleLogin({
+      flow: "auth-code", // code-based Oauth2 flow
+      redirect_uri: "http://localhost:5173",
+      scope: "openid email profile",
+
+      onError: console.warn,
+      onSuccess: res => {
+        console.log('useGoogleLogin res', res)
+      }
+    })
+  }
+
   render() {
     return (
       <>
         {this.state.loggedIn
           ? 
           <div id="content-login" className="tab-content active">
-            <p>{this.state.email} is logged in! </p>
+            <p>{this.state.name.length>=1 ? this.state.name : this.state.email} is logged in! </p>
           </div>
           : 
           <div id="content-login" className="tab-content active">
@@ -62,7 +87,7 @@ export default class LoginFormPage extends React.Component {
             </form>
             <hr style={{ margin: "24px 0" }} />
             <div className="social-login">
-              <button type="button" className="social-btn google-login">Login with Google</button>
+              <GoogleLogin clientId={this.props.clientId} onGoogleLogin={this.handleGoogleLogin} />
               <button type="button" className="social-btn salesforce-login">Login with Salesforce</button>
               <button type="button" className="social-btn facebook-login">Login with Facebook</button>
             </div>  

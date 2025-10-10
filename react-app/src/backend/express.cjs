@@ -5,12 +5,19 @@ const ftp = require('basic-ftp')
 const fs = require('fs')
 const mysql = require('mysql2')
 const bcrypt = require('bcrypt')
+const { OAuth2Client } = require('google-auth-library')
 
 const upload = multer({dest: 'data/'})
 const app = express()
 
 app.use(cors())
 app.use(express.json())
+
+const oauth2Client = new OAuth2Client(
+    "70324313823-8m2me1ufo738vp49r5ge9njdva5m5iut.apps.googleusercontent.com",
+    "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",
+    "http://localhost:5173"
+)
 
 const conn = mysql.createConnection({
     host: 'localhost',
@@ -92,6 +99,15 @@ app.post('/login-email', (req, res)=>{
             )
         }
     })
+})
+
+app.post('/auth/google/access-token', async (req, res)=>{
+    const {code} = req.body
+    if (!code) return res.sendStatus(400)
+    else {
+        const { tokens } = await oauth2Client.getToken(code)
+        res.status(200).json({tokens})
+    }
 })
 
 const port = 3333

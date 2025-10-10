@@ -13,6 +13,8 @@ export default class LoginFormPage extends React.Component {
   handleEmailChange = e => this.setState({email: e.target.value})
   handlePasswordChange = e => this.setState({password: e.target.value})
 
+  handleGoogleLogin = login => this.setState({loggedIn: true})
+
   handleSubmit = e => {
     e.preventDefault()
     // validate client-side
@@ -81,7 +83,7 @@ export default class LoginFormPage extends React.Component {
             </form>
             <hr style={{ margin: "24px 0" }} />
             <div className="social-login">
-              <GoogleLogin clientId={this.props.clientId} />
+              <GoogleLogin clientId={this.props.clientId} onGoogleLogin={this.handleGoogleLogin} />
               <button type="button" className="social-btn salesforce-login">Login with Salesforce</button>
               <button type="button" className="social-btn facebook-login">Login with Facebook</button>
             </div>  

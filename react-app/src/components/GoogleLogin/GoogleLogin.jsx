@@ -1,6 +1,11 @@
 import { useGoogleLogin } from "@react-oauth/google"
+import { useState } from "react"
 /* npm i @react-oauth/google google-auth-library dotenv */
 export default function GoogleLogin(props) {
+  const {clientId, onGoogleLogin} = props
+
+  const [accessToken, setAccessToken] = useState('')
+
    const googleLogin = useGoogleLogin({
       flow: "auth-code", // code-based Oauth2 flow
       redirect_uri: "http://localhost:5173",
@@ -17,12 +22,17 @@ export default function GoogleLogin(props) {
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({code: googleAuthCode})
         })
-        .then(console.log) // 200 OK
+        .then(res=>res.json()) // 200 OK
+        .then(res=>{
+          console.log('200 OK, response body: ', res)
+          const accessToken = res.tokens.access_token
+          onGoogleLogin(res.tokens)
+          setAccessToken(accessToken)
+        })
         .catch(console.warn)
       }
     })
 
-  const {clientId} = props
 
     return (
         <button type="button" className="social-btn google-login"

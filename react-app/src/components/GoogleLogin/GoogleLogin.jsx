@@ -1,6 +1,6 @@
 import { useGoogleLogin } from "@react-oauth/google"
 export default function GoogleLogin(props) {
-   useGoogleLogin({
+   const googleLogin = useGoogleLogin({
       flow: "auth-code", // code-based Oauth2 flow
       redirect_uri: "http://localhost:5173",
       scope: "openid email profile",
@@ -11,14 +11,9 @@ export default function GoogleLogin(props) {
       }
     })
 
-  const handleGoogleLoginButtonClick = e => {
-    const {clientId} = props
-    console.log('clientId', clientId)
-  }
-
     return (
         <button type="button" className="social-btn google-login"
-                onClick={()=>handleGoogleLoginButtonClick()}
+                onClick={()=>googleLogin()}
         >Login with Google</button>
     )
 }

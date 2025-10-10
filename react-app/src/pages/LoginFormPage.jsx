@@ -69,7 +69,7 @@ export default class LoginFormPage extends React.Component {
         {this.state.loggedIn
           ? 
           <div id="content-login" className="tab-content active">
-            <p>{this.state.email} is logged in! </p>
+            <p>{this.state.name.length>=1 ? this.state.name : this.state.email} is logged in! </p>
           </div>
           : 
           <div id="content-login" className="tab-content active">

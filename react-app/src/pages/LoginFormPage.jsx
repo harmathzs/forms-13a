@@ -3,12 +3,15 @@ import React from "react";
 import { useGoogleLogin } from "@react-oauth/google";
 import GoogleLogin from "../components/GoogleLogin/GoogleLogin";
 
+import FacebookLogin from 'react-facebook-login';
+
 export default class LoginFormPage extends React.Component {
   state = {
     email: '',
     name: '',
     password: '',
     loggedIn: null,
+    facebookAppId: '',
   }
 
   handleEmailChange = e => this.setState({email: e.target.value})
@@ -63,6 +66,10 @@ export default class LoginFormPage extends React.Component {
     })
   }
 
+  responseFacebook = response => {
+    console.log('responseFacebook response', response)
+  }
+
   render() {
     return (
       <>
@@ -89,7 +96,13 @@ export default class LoginFormPage extends React.Component {
             <div className="social-login">
               <GoogleLogin clientId={this.props.clientId} onGoogleLogin={this.handleGoogleLogin} />
               <button type="button" className="social-btn salesforce-login">Login with Salesforce</button>
-              <button type="button" className="social-btn facebook-login">Login with Facebook</button>
+              <FacebookLogin
+                appId={this.state.facebookAppId}
+                fields="name,email,picture"
+                callback={this.responseFacebook}
+                icon="fa-facebook"
+                className="social-btn facebook-login"
+              />
             </div>  
             {this.state.loggedIn === false && <p>You are NOT logged in yet, sorry. </p>}
           </div>

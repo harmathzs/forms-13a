@@ -76,19 +76,23 @@ export default class LoginFormPage extends React.Component {
               "data": {
                   "height": 50,
                   "is_silhouette": false,
-                  "url": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=10163438477154798&height=50&width=50&ext=1763027799&hash=AT_Hh4aN5JMBYtqyYC5DEAWw",
+                  "url": "TODO",
                   "width": 50
               }
           },
-          "id": "10163438477154798",
-          "userID": "10163438477154798",
+          "id": "TODO",
+          "userID": "TODO",
           "expiresIn": 3802,
-          "accessToken": "EAAK5BW8Q6FoBPv9M4tweQsK3xZB2tZAI7XHr1vwWclEkwrCOZB8LZA4lchb6aP09xMtdWNE0Rrpka9XcaRyOmilMqYZBU2lCFfh4gQ03oQSGw8kSIrtKnbQKZCT0GTq6SK8ZAvzSrAKjrdZCDazpxsyDxLlxcsIATW1czmzvVi9liON7Ubz5QFq0SzI5xOSYZAockXs9DwjyzbXtHHS18uIguHYHWtVXeZA9UZD",
-          "signedRequest": "epSy_ECXhuyrPzJIUBg5-eVO9otxpxaZs3e1bIMbNNI.eyJ1c2VyX2lkIjoiMTAxNjM0Mzg0NzcxNTQ3OTgiLCJjb2RlIjoiQVFDTTFVZTZsa2ZIVVRUbkU0bUJUMXkxX0JBY0I0aFBGOFk5ckVvMTUzYUN5d25HcVhKeGxEeWs4azJvRlFsa0FOR0tPeGxNRVp4NTNrTG5FS0VEc3VOMDJ3N2ViTkZZUXM0eklrcWczXzBTR0ZmYWUyQk5aTGo1VDVtNVhBOWMyU09TU2xCTnBBSVM1UlNUczRZWE5uWTM0MTFiV0lCcG0ybm9Cdlp3T0FhQllhTkFLQjEySXJ0ZG92aFRDYl9aazdBeE4xc29BZHRRaFFkQUhCbm9VQlNxcnZnVDY1OGppaVV3WXI0V3J4bFFneG9BNGhBd0JWVXg1Z2Y2YXlpN0VqSnJPVF92cXNaeEd2R1RaSFgzMVVfeWJBemw0TS1veDZPczA2U2FrUEV3T3JPWE1aMTlTTFgwTWt0aWRfWHM2VTZqNmVLREszZC1pOVk4NV8xR0gyb0hIeDAtY3lybURfSGdMeDl5UnBWZ0R3IiwiYWxnb3JpdGhtIjoiSE1BQy1TSEEyNTYiLCJpc3N1ZWRfYXQiOjE3NjA0MzU3OTh9",
+          "accessToken": "TODO",
+          "signedRequest": "TODO",
           "graphDomain": "facebook",
           "data_access_expiration_time": 1768211798
       }
     */
+
+      if (response.accessToken) {
+        this.setState({loggedIn: true, email: response.email, name: response.name})
+      }
   }
 
   render() {
